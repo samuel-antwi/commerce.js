@@ -1,7 +1,26 @@
-import '../styles/globals.css'
+import Layout from '../components/Layout';
+import { ProductContextProvider } from '../context/ProductsContexProvider';
+import '../styles/tailwind.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: true,
+    },
+  },
+});
 
-export default MyApp
+const MyApp = ({ Component, pageProps }) => {
+  return (
+    <QueryClientProvider client={client}>
+      <ProductContextProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ProductContextProvider>
+    </QueryClientProvider>
+  );
+};
+
+export default MyApp;
