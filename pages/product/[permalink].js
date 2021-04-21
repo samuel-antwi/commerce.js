@@ -8,24 +8,73 @@ const ProductDetails = ({ product }) => {
   const [viewDetails, setViewDetails] = useState(false);
   const [viewShippingInfo, setViewShippingInfo] = useState(false);
 
-  console.log(product);
+  const [active, setActive] = useState(0);
 
   const { name, media, price, description, variant_groups } = product;
+
+  // View next image
+  const handleNextImage = () => {
+    if (active === 3) {
+      setActive(0);
+    }
+    active < 3 ? setActive(active + 1) : null;
+  };
+
+  // View previous image
+  const handlePreviousImage = () => {
+    if (active === 0) {
+      setActive(3);
+    }
+    active !== 0 ? setActive(active - 1) : null;
+  };
 
   return (
     <main>
       <div className='container mx-auto'>
         <div className='md:grid grid-cols-6 gap-10'>
-          <div className='col-span-1 hidden md:block'>
-            <p>hey</p>
+          <div className='col-span-1 '>
+            <div className='flex flex-col space-y-3'>
+              <img
+                onClick={() => setActive(0)}
+                className={`${
+                  active === 0 && 'border border-gray-500'
+                } w-[150px] h-[150px] object-cover cursor-pointer`}
+                src={product.assets[0].url}
+                alt={name}
+              />
+              <img
+                onClick={() => setActive(1)}
+                className={`${
+                  active === 1 && 'border border-gray-500'
+                } w-[150px] h-[150px] object-cover cursor-pointer`}
+                src={product.assets[1].url}
+                alt={name}
+              />
+              <img
+                onClick={() => setActive(2)}
+                className={`${
+                  active === 2 && 'border border-gray-500'
+                } w-[150px] h-[150px] object-cover cursor-pointer`}
+                src={product.assets[2].url}
+                alt={name}
+              />
+              <img
+                onClick={() => setActive(3)}
+                className={`${
+                  active === 3 && 'border border-gray-500'
+                } w-[150px] h-[150px] object-cover cursor-pointer`}
+                src={product.assets[3].url}
+                alt={name}
+              />
+            </div>
           </div>
           <div className='col-span-3 mb-5 md:mb-0 relative'>
-            <img src={media.source} />
+            <img src={product.assets[active].url} />
             <div className='flex items-center justify-between absolute w-full left-0 right-0 top-1/2'>
-              <button>
+              <button onClick={handlePreviousImage}>
                 <BsChevronLeft className='text-gray-400' size={40} />
               </button>
-              <button>
+              <button onClick={handleNextImage}>
                 <BsChevronRight className='text-gray-400' size={40} />
               </button>
             </div>
@@ -48,7 +97,7 @@ const ProductDetails = ({ product }) => {
                 <span> {price.formatted_with_symbol}</span>
               </button>
             </div>
-            <div className='border-b border-black'>
+            <div className='border-b border-black mx-5 md:mx-0'>
               <button
                 onClick={() => setViewDetails(!viewDetails)}
                 aria-label='See shipping information'
@@ -63,7 +112,7 @@ const ProductDetails = ({ product }) => {
                 </p>
               )}
             </div>
-            <div className='border-b border-black'>
+            <div className='border-b border-black mx-5 md:mx-0'>
               <button
                 onClick={() => setViewShippingInfo(!viewShippingInfo)}
                 aria-label='Read details'
@@ -111,16 +160,4 @@ export const getStaticProps = async ({ params }) => {
       product,
     },
   };
-};
-
-export const ProductImagesList = ({ product }) => {
-  const { assets } = product;
-  // console.log(assets);
-  return (
-    <div>
-      {assets.map((asset) => {
-        <img src={asset.url} alt='' />;
-      })}
-    </div>
-  );
 };
