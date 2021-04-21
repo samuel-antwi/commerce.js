@@ -1,11 +1,11 @@
-import ProductsList from '../components/ProductsList';
-import { commerce } from '../lib/commerce';
+import ProductsList from '../../components/ProductsList';
+import { commerce } from '../../lib/commerce';
 
 const Products = ({ data }) => {
   console.log(data);
   return (
     <div>
-      <ProductsList data={data} />
+      <ProductsList data={data} />{' '}
     </div>
   );
 };

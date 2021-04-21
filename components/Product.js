@@ -7,11 +7,11 @@ import Link from 'next/link';
 const Product = ({ product }) => {
   const { handleAddToCart } = useProductsProvider();
   const router = useRouter();
-  const { name, media, description, price, id } = product;
+  const { name, media, description, price, id, permalink } = product;
   return (
     <Styles className='col-span-1 p-5'>
       <div className='relative wrapper'>
-        <Link href={`/product/${id}`}>
+        <Link href={`/product/${permalink}`}>
           <a>
             <img
               className='mb-3 md:w-[450px] md:h-[450px] w-full h-full object-cover'
@@ -23,11 +23,13 @@ const Product = ({ product }) => {
         <button
           onClick={async () => {
             await handleAddToCart(id, 1);
-            router.push('/cart');
           }}
           aria-label='Add to basket'
-          className='overlay focus:outline-none '>
-          <FaCartPlus className='text-[#A44200]' size={30} />
+          className=' focus:outline-none overlay px-5 bg-black w-full text-gray-300'>
+          <span className='flex justify-between items-center tracking-wide'>
+            Add to basket
+            <FaCartPlus size={30} />
+          </span>
         </button>
       </div>
       <p className='text-gray-600 text-sm capitalize'>{name}</p>
