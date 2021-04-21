@@ -7,27 +7,27 @@ import { useProductsProvider } from '../../context/ProductsContexProvider';
 import { BsChevronRight } from 'react-icons/bs';
 
 const FilledCart = ({ cart }) => {
-  const { handleUpdateQty } = useProductsProvider();
+  const { handleUpdateQty, handleRemoveFromCart } = useProductsProvider();
 
   if (!cart.line_items.length) return <p>Loading...</p>;
 
   return (
     <div>
-      <h1 className='font-semibold md:text-2xl text-lg capitalize'>My basket</h1>
-      <div className='flex items-center justify-between my-5'>
+      <h1 className='font-semibold md:text-2xl text-lg capitalize px-5'>My basket</h1>
+      <div className='md:flex items-center justify-between my-5 px-5'>
         <Link href='/products'>
           <a>
-            <p className='border uppercase  py-2 px-5'>shop more</p>
+            <p className='border uppercase mb-5 md:mb-0  py-2 px-5'>shop more</p>
           </a>
         </Link>
-        <div className='w-1/2'>
-          <div className='flex justify-between items-center text-xl font-bold text-gray-700 bg-gray-100 p-2'>
+        <div className='md:w-1/2 w-full'>
+          <div className='flex justify-between items-center md:text-xl md:font-bold text-gray-700 bg-[#F4FAFB] p-2'>
             <h1>Sub total</h1>
             {Object.keys(cart).length !== 0 && <p>{cart.subtotal.formatted_with_symbol}</p>}
           </div>
           <Link href='/checkout'>
             <a>
-              <button className='border block w-full uppercase  py-2 px-5 bg-[#08A78E] text-gray-100'>
+              <button className='border block w-full capitalize tracking-wide  py-2 px-5 bg-black text-gray-100'>
                 <span className='flex items-center justify-between'>
                   checkout securely
                   <BsChevronRight />
@@ -39,26 +39,30 @@ const FilledCart = ({ cart }) => {
       </div>
       <div className='bg-white shadow'>
         {cart.line_items.map((product) => {
-          const { price, name, media, id, quantity, line_total } = product;
+          const { price, name, media, id, quantity, line_total, permalink } = product;
           return (
             <div key={id} className='md:grid grid-cols-4 border-b'>
               <div className='flex col-span-2 py-5 mx-5 relative' key={id}>
-                <Link href='/'>
+                <Link href={`/product/${permalink}`}>
                   <a className='mr-3'>
-                    <img className='w-[100px] h-[100px]' src={media.source} alt={name} />
+                    <img
+                      className='w-[100px] h-[100px] object-cover'
+                      src={media.source}
+                      alt={name}
+                    />
                   </a>
                 </Link>
                 <div className='flex flex-col space-y-2'>
-                  <Link href='/'>
+                  <Link href={`/product/${permalink}`}>
                     <a className='text-gray-600 hover:text-blue-400'>{name}</a>
                   </Link>
                   <p className='text-green-700'>In stock</p>
+                  <h2>{price.formatted_with_symbol}</h2>
                 </div>
               </div>
               <div className='col-span-1'>
                 <div className='flex flex-col justify-center items-center h-full'>
                   <div className='my-auto'>
-                    <h2 className='text-center mb-5'>{price.formatted_with_symbol}</h2>
                     <div className='flex items-center space-x-3'>
                       <button
                         onClick={() => handleUpdateQty(id, quantity - 1)}
@@ -74,6 +78,7 @@ const FilledCart = ({ cart }) => {
                     </div>
                     <div className='flex justify-center items-center'>
                       <button
+                        onClick={() => handleRemoveFromCart(id)}
                         aria-label='Remove from cart'
                         className='py-2 focus:outline-none text-gray-600 hover:text-red-600 text-sm underline'>
                         Remove
