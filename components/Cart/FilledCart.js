@@ -7,7 +7,7 @@ import { useProductsProvider } from '../../context/ProductsContexProvider';
 import { BsChevronRight } from 'react-icons/bs';
 
 const FilledCart = ({ cart }) => {
-  const { handleUpdateQty } = useProductsProvider();
+  const { handleUpdateQty, handleRemoveFromCart } = useProductsProvider();
 
   if (!cart.line_items.length) return <p>Loading...</p>;
 
@@ -21,13 +21,13 @@ const FilledCart = ({ cart }) => {
           </a>
         </Link>
         <div className='w-1/2'>
-          <div className='flex justify-between items-center text-xl font-bold text-gray-700 bg-gray-100 p-2'>
+          <div className='flex justify-between items-center text-xl font-bold text-gray-700 bg-[#F4FAFB] p-2'>
             <h1>Sub total</h1>
             {Object.keys(cart).length !== 0 && <p>{cart.subtotal.formatted_with_symbol}</p>}
           </div>
           <Link href='/checkout'>
             <a>
-              <button className='border block w-full uppercase  py-2 px-5 bg-[#08A78E] text-gray-100'>
+              <button className='border block w-full capitalize tracking-wide  py-2 px-5 bg-black text-gray-100'>
                 <span className='flex items-center justify-between'>
                   checkout securely
                   <BsChevronRight />
@@ -45,7 +45,11 @@ const FilledCart = ({ cart }) => {
               <div className='flex col-span-2 py-5 mx-5 relative' key={id}>
                 <Link href='/'>
                   <a className='mr-3'>
-                    <img className='w-[100px] h-[100px]' src={media.source} alt={name} />
+                    <img
+                      className='w-[100px] h-[100px] object-cover'
+                      src={media.source}
+                      alt={name}
+                    />
                   </a>
                 </Link>
                 <div className='flex flex-col space-y-2'>
@@ -74,6 +78,7 @@ const FilledCart = ({ cart }) => {
                     </div>
                     <div className='flex justify-center items-center'>
                       <button
+                        onClick={() => handleRemoveFromCart(id)}
                         aria-label='Remove from cart'
                         className='py-2 focus:outline-none text-gray-600 hover:text-red-600 text-sm underline'>
                         Remove

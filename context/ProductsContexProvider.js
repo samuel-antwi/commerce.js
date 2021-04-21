@@ -16,8 +16,15 @@ export const ProductContextProvider = ({ children }) => {
     setCart(cart);
   };
 
+  // Update cart
   const handleUpdateQty = async (productId, quantity) => {
     const { cart } = await commerce.cart.update(productId, { quantity });
+    setCart(cart);
+  };
+
+  // Remove from cart
+  const handleRemoveFromCart = async (productId) => {
+    const { cart } = await commerce.cart.remove(productId);
     setCart(cart);
   };
 
@@ -26,7 +33,8 @@ export const ProductContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <ProductsContext.Provider value={{ products, cart, handleAddToCart, handleUpdateQty }}>
+    <ProductsContext.Provider
+      value={{ products, cart, handleAddToCart, handleUpdateQty, handleRemoveFromCart }}>
       {children}
     </ProductsContext.Provider>
   );
