@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { BsChevronLeft, BsChevronRight, BsPlus } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
 import { useState } from 'react';
+import styled from 'styled-components';
 
 const ProductDetails = ({ product }) => {
   const [viewDetails, setViewDetails] = useState(false);
@@ -32,7 +33,7 @@ const ProductDetails = ({ product }) => {
     <main>
       <div className='container mx-auto'>
         <div className='md:grid grid-cols-6 gap-10'>
-          <div className='col-span-1 '>
+          <div className='col-span-1 hidden md:block '>
             <div className='flex flex-col space-y-3'>
               <img
                 onClick={() => setActive(0)}
@@ -71,10 +72,10 @@ const ProductDetails = ({ product }) => {
           <div className='col-span-3 mb-5 md:mb-0 relative'>
             <img src={product.assets[active].url} />
             <div className='flex items-center justify-between absolute w-full left-0 right-0 top-1/2'>
-              <button onClick={handlePreviousImage}>
+              <button aria-label='previous photo' className='md:p-5' onClick={handlePreviousImage}>
                 <BsChevronLeft className='text-gray-400' size={40} />
               </button>
-              <button onClick={handleNextImage}>
+              <button aria-label='next photo' className='md:p-5' onClick={handleNextImage}>
                 <BsChevronRight className='text-gray-400' size={40} />
               </button>
             </div>
@@ -91,8 +92,10 @@ const ProductDetails = ({ product }) => {
               </div>
             </div>
             <div className='px-5 md:px-0 pt-6'>
-              <button className='bg-black focus:outline-none focus:ring-2 focus:ring-gray-500  items-center space-x-10 text-gray-300 py-3 block w-full justify-between'>
-                <span>Add to cart</span>
+              <button
+                aria-label='add to basket'
+                className='bg-black focus:outline-none focus:ring-2 focus:ring-gray-500  items-center space-x-10 text-gray-300 py-3 block w-full justify-between'>
+                <span>Add to basket</span>
                 <span>|</span>
                 <span> {price.formatted_with_symbol}</span>
               </button>
@@ -161,3 +164,8 @@ export const getStaticProps = async ({ params }) => {
     },
   };
 };
+
+const ActiveImage = styled.div`
+  transition-duration: 1s ease;
+  scale: 1.08;
+`;
