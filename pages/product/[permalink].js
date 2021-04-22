@@ -3,15 +3,16 @@ import Image from 'next/image';
 import { BsChevronLeft, BsChevronRight, BsPlus } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
 import { useState } from 'react';
-import styled from 'styled-components';
+import { HiOutlineShoppingCart } from 'react-icons/hi';
+import { useProductsProvider } from '../../context/ProductsContexProvider';
 
 const ProductDetails = ({ product }) => {
+  const { handleAddToCart } = useProductsProvider();
   const [viewDetails, setViewDetails] = useState(false);
   const [viewShippingInfo, setViewShippingInfo] = useState(false);
-
   const [active, setActive] = useState(0);
 
-  const { name, media, price, description, variant_groups } = product;
+  const { name, media, price, description, variant_groups, id } = product;
 
   // View next image
   const handleNextImage = () => {
@@ -69,15 +70,20 @@ const ProductDetails = ({ product }) => {
               />
             </div>
           </div>
-          <div className='col-span-3 mb-5 md:mb-0 relative'>
-            <img src={product.assets[active].url} />
-            <div className='flex items-center justify-between absolute w-full left-0 right-0 top-1/2'>
-              <button aria-label='previous photo' className='md:p-5' onClick={handlePreviousImage}>
-                <BsChevronLeft className='text-gray-400' size={40} />
-              </button>
-              <button aria-label='next photo' className='md:p-5' onClick={handleNextImage}>
-                <BsChevronRight className='text-gray-400' size={40} />
-              </button>
+          <div className='col-span-3 mb-5 md:mb-0 relative '>
+            <div className='relative'>
+              <img src={product.assets[active].url} />
+              <div className='flex items-center justify-between absolute top-[45%] w-full '>
+                <button
+                  aria-label='previous photo'
+                  className='md:p-5'
+                  onClick={handlePreviousImage}>
+                  <BsChevronLeft className='text-gray-400' size={40} />
+                </button>
+                <button aria-label='next photo' className='md:p-5' onClick={handleNextImage}>
+                  <BsChevronRight className='text-gray-400' size={40} />
+                </button>
+              </div>
             </div>
           </div>
           <div className='col-span-2'>
@@ -93,11 +99,11 @@ const ProductDetails = ({ product }) => {
             </div>
             <div className='px-5 md:px-0 pt-6'>
               <button
+                onClick={() => handleAddToCart(id, 1)}
                 aria-label='add to basket'
-                className='bg-black focus:outline-none focus:ring-2 focus:ring-gray-500  items-center space-x-10 text-gray-300 py-3 block w-full justify-between'>
-                <span>Add to basket</span>
-                <span>|</span>
-                <span> {price.formatted_with_symbol}</span>
+                className='bg-black flex items-center justify-around w-full focus:outline-none focus:ring-2 focus:ring-gray-500 space-x-10 text-gray-300 py-3'>
+                <span className='uppercase tracking-wider'>Add to basket</span>
+                <HiOutlineShoppingCart size={20} />
               </button>
             </div>
             <div className='border-b border-black mx-5 md:mx-0'>
@@ -164,8 +170,3 @@ export const getStaticProps = async ({ params }) => {
     },
   };
 };
-
-const ActiveImage = styled.div`
-  transition-duration: 1s ease;
-  scale: 1.08;
-`;
