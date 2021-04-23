@@ -132,7 +132,7 @@ const ProductDetails = ({ product }) => {
 export default ProductDetails;
 
 export async function getStaticPaths() {
-  const { data: products } = await commerce.products.list();
+  const { data: products } = await commerce.products.list({ limit: 100 });
 
   return {
     paths: products.map((product) => ({
@@ -140,7 +140,7 @@ export async function getStaticPaths() {
         permalink: product.permalink,
       },
     })),
-    fallback: true,
+    fallback: false,
   };
 }
 
