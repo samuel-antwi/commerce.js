@@ -5,6 +5,8 @@ import { BiMinus } from 'react-icons/bi';
 import { useState } from 'react';
 import { HiOutlineShoppingCart } from 'react-icons/hi';
 import { useProductsProvider } from '../../context/ProductsContexProvider';
+import 'react-image-gallery/styles/css/image-gallery.css';
+import ImageGallery from 'react-image-gallery';
 
 const ProductDetails = ({ product }) => {
   const { handleAddToCart } = useProductsProvider();
@@ -39,7 +41,7 @@ const ProductDetails = ({ product }) => {
               <img
                 onClick={() => setActive(0)}
                 className={`${
-                  active === 0 && 'border border-gray-500'
+                  active === 0 && 'border border-[#6466F1]'
                 } w-[150px] h-[150px] object-cover cursor-pointer`}
                 src={product.assets[0].url}
                 alt={name}
@@ -47,7 +49,7 @@ const ProductDetails = ({ product }) => {
               <img
                 onClick={() => setActive(1)}
                 className={`${
-                  active === 1 && 'border border-gray-500'
+                  active === 1 && 'border border-[#6466F1]'
                 } w-[150px] h-[150px] object-cover cursor-pointer`}
                 src={product.assets[1].url}
                 alt={name}
@@ -55,7 +57,7 @@ const ProductDetails = ({ product }) => {
               <img
                 onClick={() => setActive(2)}
                 className={`${
-                  active === 2 && 'border border-gray-500'
+                  active === 2 && 'border border-[#6466F1]'
                 } w-[150px] h-[150px] object-cover cursor-pointer`}
                 src={product.assets[2].url}
                 alt={name}
@@ -63,7 +65,7 @@ const ProductDetails = ({ product }) => {
               <img
                 onClick={() => setActive(3)}
                 className={`${
-                  active === 3 && 'border border-gray-500'
+                  active === 3 && 'border border-[#6466F1]'
                 } w-[150px] h-[150px] object-cover cursor-pointer`}
                 src={product.assets[3].url}
                 alt={name}
@@ -71,16 +73,19 @@ const ProductDetails = ({ product }) => {
             </div>
           </div>
           <div className='col-span-3 mb-5 md:mb-0 relative '>
-            <div className='relative'>
-              <img src={product.assets[active].url} />
+            <div className='relative '>
+              <img className='' src={product.assets[active].url} />
               <div className='flex items-center justify-between absolute top-[45%] w-full '>
                 <button
                   aria-label='previous photo'
-                  className='md:p-5'
+                  className='md:pt-5  md:pb-5 md:pl-5 md:pr-10 focus:outline-none focus:ring-2 focus:border-[#6466F1]'
                   onClick={handlePreviousImage}>
                   <BsChevronLeft className='text-gray-400' size={40} />
                 </button>
-                <button aria-label='next photo' className='md:p-5' onClick={handleNextImage}>
+                <button
+                  aria-label='next photo'
+                  className='md:pt-5 md:pb-5 md:pl-5 md:pr-10   focus:outline-none focus:ring-2 focus:border-[#6466F1]'
+                  onClick={handleNextImage}>
                   <BsChevronRight className='text-gray-400' size={40} />
                 </button>
               </div>
@@ -108,7 +113,10 @@ const ProductDetails = ({ product }) => {
             </div>
             <div className='border-b border-black mx-5 md:mx-0'>
               <button
-                onClick={() => setViewDetails(!viewDetails)}
+                onClick={() => {
+                  setViewDetails(!viewDetails);
+                  viewShippingInfo ? setViewShippingInfo(false) : null;
+                }}
                 aria-label='See shipping information'
                 className='flex items-center justify-between w-full mt-12 mb-2 focus:outline-none'>
                 <span className='text-gray-800'>Shipping and returns</span>
@@ -123,7 +131,10 @@ const ProductDetails = ({ product }) => {
             </div>
             <div className='border-b border-black mx-5 md:mx-0'>
               <button
-                onClick={() => setViewShippingInfo(!viewShippingInfo)}
+                onClick={() => {
+                  setViewShippingInfo(!viewShippingInfo);
+                  viewDetails ? setViewDetails(false) : null;
+                }}
                 aria-label='Read details'
                 className='flex items-center justify-between w-full mt-7 mb-2 focus:outline-none'>
                 <span className='text-gray-800'>Details</span>
