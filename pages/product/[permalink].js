@@ -14,7 +14,7 @@ const ProductDetails = ({ product }) => {
   const [viewShippingInfo, setViewShippingInfo] = useState(false);
   const [active, setActive] = useState(0);
 
-  const { name, media, price, description, variant_groups, id } = product;
+  const { name, media, price, description, variant_groups, id, assets } = product;
 
   // View next image
   const handleNextImage = () => {
@@ -32,63 +32,38 @@ const ProductDetails = ({ product }) => {
     active !== 0 ? setActive(active - 1) : null;
   };
 
+  const images = [
+    {
+      original: assets[0].url,
+      thumbnail: assets[0].url,
+    },
+    {
+      original: assets[1].url,
+      thumbnail: assets[1].url,
+    },
+    {
+      original: assets[2].url,
+      thumbnail: assets[2].url,
+    },
+    {
+      original: assets[3].url,
+      thumbnail: assets[3].url,
+    },
+  ];
+
   return (
-    <main>
-      <div className='container mx-auto'>
+    <main className='pt-10'>
+      <div className='max-w-7xl mx-auto'>
         <div className='md:grid grid-cols-6 gap-10'>
-          <div className='col-span-1 hidden md:block '>
-            <div className='flex flex-col space-y-3'>
-              <img
-                onClick={() => setActive(0)}
-                className={`${
-                  active === 0 && 'border border-[#6466F1]'
-                } w-[150px] h-[150px] object-cover cursor-pointer`}
-                src={product.assets[0].url}
-                alt={name}
-              />
-              <img
-                onClick={() => setActive(1)}
-                className={`${
-                  active === 1 && 'border border-[#6466F1]'
-                } w-[150px] h-[150px] object-cover cursor-pointer`}
-                src={product.assets[1].url}
-                alt={name}
-              />
-              <img
-                onClick={() => setActive(2)}
-                className={`${
-                  active === 2 && 'border border-[#6466F1]'
-                } w-[150px] h-[150px] object-cover cursor-pointer`}
-                src={product.assets[2].url}
-                alt={name}
-              />
-              <img
-                onClick={() => setActive(3)}
-                className={`${
-                  active === 3 && 'border border-[#6466F1]'
-                } w-[150px] h-[150px] object-cover cursor-pointer`}
-                src={product.assets[3].url}
-                alt={name}
-              />
-            </div>
-          </div>
-          <div className='col-span-3 mb-5 md:mb-0 relative '>
+          <div className='col-span-4 mb-5 md:mb-0 relative '>
             <div className='relative '>
-              <img className='' src={product.assets[active].url} />
-              <div className='flex items-center justify-between absolute top-[45%] w-full '>
-                <button
-                  aria-label='previous photo'
-                  className='md:pt-5  md:pb-5 md:pl-5 md:pr-10 focus:outline-none focus:ring-2 focus:border-[#6466F1]'
-                  onClick={handlePreviousImage}>
-                  <BsChevronLeft className='text-gray-400' size={40} />
-                </button>
-                <button
-                  aria-label='next photo'
-                  className='md:pt-5 md:pb-5 md:pl-5 md:pr-10   focus:outline-none focus:ring-2 focus:border-[#6466F1]'
-                  onClick={handleNextImage}>
-                  <BsChevronRight className='text-gray-400' size={40} />
-                </button>
-              </div>
+              <ImageGallery
+                showPlayButton={false}
+                thumbnailPosition='left'
+                items={images}
+                onErrorImageURL={name}
+                showFullscreenButton={false}
+              />
             </div>
           </div>
           <div className='col-span-2'>
@@ -165,7 +140,7 @@ export async function getStaticPaths() {
         permalink: product.permalink,
       },
     })),
-    fallback: false,
+    fallback: true,
   };
 }
 

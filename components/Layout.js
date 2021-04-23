@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import AnnoucementBar from './AnnoucementBar';
+import Footer from './Footer';
 import Navbar from './Navbar/Navbar';
 
 const Layout = ({ title, children }) => {
@@ -8,7 +9,8 @@ const Layout = ({ title, children }) => {
       <Navbar />
       <AnnoucementBar />
       <Head>{title}</Head>
-      <div className='py-20'>{children}</div>
+      <div>{children}</div>
+      <Footer />
     </div>
   );
 };
