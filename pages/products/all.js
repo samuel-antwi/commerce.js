@@ -4,7 +4,7 @@ import { commerce } from '../../lib/commerce';
 const Products = ({ data }) => {
   console.log(data);
   return (
-    <div>
+    <div className='pt-10'>
       <ProductsList data={data} />
     </div>
   );

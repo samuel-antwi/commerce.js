@@ -1,5 +1,6 @@
 import Layout from '../components/Layout';
 import { ProductContextProvider } from '../context/ProductsContexProvider';
+import '../styles/globals.css';
 import '../styles/tailwind.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
