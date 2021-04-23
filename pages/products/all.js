@@ -5,7 +5,7 @@ const Products = ({ data }) => {
   console.log(data);
   return (
     <div>
-      <ProductsList data={data} />{' '}
+      <ProductsList data={data} />
     </div>
   );
 };
@@ -13,7 +13,7 @@ const Products = ({ data }) => {
 export default Products;
 
 export const getStaticProps = async () => {
-  const { data } = await commerce.products.list();
+  const { data } = await commerce.products.list({ limit: 100 });
   return {
     props: {
       data,

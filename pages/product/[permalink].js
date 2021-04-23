@@ -3,15 +3,18 @@ import Image from 'next/image';
 import { BsChevronLeft, BsChevronRight, BsPlus } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
 import { useState } from 'react';
-import styled from 'styled-components';
+import { HiOutlineShoppingCart } from 'react-icons/hi';
+import { useProductsProvider } from '../../context/ProductsContexProvider';
+import 'react-image-gallery/styles/css/image-gallery.css';
+import ImageGallery from 'react-image-gallery';
 
 const ProductDetails = ({ product }) => {
+  const { handleAddToCart } = useProductsProvider();
   const [viewDetails, setViewDetails] = useState(false);
   const [viewShippingInfo, setViewShippingInfo] = useState(false);
-
   const [active, setActive] = useState(0);
 
-  const { name, media, price, description, variant_groups } = product;
+  const { name, media, price, description, variant_groups, id } = product;
 
   // View next image
   const handleNextImage = () => {
@@ -38,7 +41,7 @@ const ProductDetails = ({ product }) => {
               <img
                 onClick={() => setActive(0)}
                 className={`${
-                  active === 0 && 'border border-gray-500'
+                  active === 0 && 'border border-[#6466F1]'
                 } w-[150px] h-[150px] object-cover cursor-pointer`}
                 src={product.assets[0].url}
                 alt={name}
@@ -46,7 +49,7 @@ const ProductDetails = ({ product }) => {
               <img
                 onClick={() => setActive(1)}
                 className={`${
-                  active === 1 && 'border border-gray-500'
+                  active === 1 && 'border border-[#6466F1]'
                 } w-[150px] h-[150px] object-cover cursor-pointer`}
                 src={product.assets[1].url}
                 alt={name}
@@ -54,7 +57,7 @@ const ProductDetails = ({ product }) => {
               <img
                 onClick={() => setActive(2)}
                 className={`${
-                  active === 2 && 'border border-gray-500'
+                  active === 2 && 'border border-[#6466F1]'
                 } w-[150px] h-[150px] object-cover cursor-pointer`}
                 src={product.assets[2].url}
                 alt={name}
@@ -62,22 +65,30 @@ const ProductDetails = ({ product }) => {
               <img
                 onClick={() => setActive(3)}
                 className={`${
-                  active === 3 && 'border border-gray-500'
+                  active === 3 && 'border border-[#6466F1]'
                 } w-[150px] h-[150px] object-cover cursor-pointer`}
                 src={product.assets[3].url}
                 alt={name}
               />
             </div>
           </div>
-          <div className='col-span-3 mb-5 md:mb-0 relative'>
-            <img src={product.assets[active].url} />
-            <div className='flex items-center justify-between absolute w-full left-0 right-0 top-1/2'>
-              <button aria-label='previous photo' className='md:p-5' onClick={handlePreviousImage}>
-                <BsChevronLeft className='text-gray-400' size={40} />
-              </button>
-              <button aria-label='next photo' className='md:p-5' onClick={handleNextImage}>
-                <BsChevronRight className='text-gray-400' size={40} />
-              </button>
+          <div className='col-span-3 mb-5 md:mb-0 relative '>
+            <div className='relative '>
+              <img className='' src={product.assets[active].url} />
+              <div className='flex items-center justify-between absolute top-[45%] w-full '>
+                <button
+                  aria-label='previous photo'
+                  className='md:pt-5  md:pb-5 md:pl-5 md:pr-10 focus:outline-none focus:ring-2 focus:border-[#6466F1]'
+                  onClick={handlePreviousImage}>
+                  <BsChevronLeft className='text-gray-400' size={40} />
+                </button>
+                <button
+                  aria-label='next photo'
+                  className='md:pt-5 md:pb-5 md:pl-5 md:pr-10   focus:outline-none focus:ring-2 focus:border-[#6466F1]'
+                  onClick={handleNextImage}>
+                  <BsChevronRight className='text-gray-400' size={40} />
+                </button>
+              </div>
             </div>
           </div>
           <div className='col-span-2'>
@@ -93,16 +104,19 @@ const ProductDetails = ({ product }) => {
             </div>
             <div className='px-5 md:px-0 pt-6'>
               <button
+                onClick={() => handleAddToCart(id, 1)}
                 aria-label='add to basket'
-                className='bg-black focus:outline-none focus:ring-2 focus:ring-gray-500  items-center space-x-10 text-gray-300 py-3 block w-full justify-between'>
-                <span>Add to basket</span>
-                <span>|</span>
-                <span> {price.formatted_with_symbol}</span>
+                className='bg-black flex items-center justify-around w-full focus:outline-none focus:ring-2 focus:ring-gray-500 space-x-10 text-gray-300 py-3'>
+                <span className='uppercase tracking-wider'>Add to basket</span>
+                <HiOutlineShoppingCart size={20} />
               </button>
             </div>
             <div className='border-b border-black mx-5 md:mx-0'>
               <button
-                onClick={() => setViewDetails(!viewDetails)}
+                onClick={() => {
+                  setViewDetails(!viewDetails);
+                  viewShippingInfo ? setViewShippingInfo(false) : null;
+                }}
                 aria-label='See shipping information'
                 className='flex items-center justify-between w-full mt-12 mb-2 focus:outline-none'>
                 <span className='text-gray-800'>Shipping and returns</span>
@@ -117,7 +131,10 @@ const ProductDetails = ({ product }) => {
             </div>
             <div className='border-b border-black mx-5 md:mx-0'>
               <button
-                onClick={() => setViewShippingInfo(!viewShippingInfo)}
+                onClick={() => {
+                  setViewShippingInfo(!viewShippingInfo);
+                  viewDetails ? setViewDetails(false) : null;
+                }}
                 aria-label='Read details'
                 className='flex items-center justify-between w-full mt-7 mb-2 focus:outline-none'>
                 <span className='text-gray-800'>Details</span>
@@ -164,8 +181,3 @@ export const getStaticProps = async ({ params }) => {
     },
   };
 };
-
-const ActiveImage = styled.div`
-  transition-duration: 1s ease;
-  scale: 1.08;
-`;

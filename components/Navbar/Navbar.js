@@ -8,7 +8,7 @@ const Navbar = () => {
   const { cart } = useProductsProvider();
 
   return (
-    <nav className='sticky top-0 bg-white  z-10'>
+    <nav className='sticky top-0 bg-[#2D2D2D] text-gray-100 mt-4  z-10'>
       <div className='md:px-14 px-8 py-5 shadow  flex items-center justify-between'>
         <Link href='/'>
           <a>

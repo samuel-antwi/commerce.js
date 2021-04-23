@@ -15,7 +15,7 @@ const FilledCart = ({ cart }) => {
     <div>
       <h1 className='font-semibold md:text-2xl text-lg capitalize px-5'>My basket</h1>
       <div className='md:flex items-center justify-between my-5 px-5'>
-        <Link href='/products'>
+        <Link href='/products/all'>
           <a>
             <p className='border uppercase mb-5 md:mb-0  py-2 px-5'>shop more</p>
           </a>
@@ -38,7 +38,7 @@ const FilledCart = ({ cart }) => {
         </div>
       </div>
       <div className='bg-white shadow'>
-        {cart.line_items.map((product) => {
+        {cart.line_items.reverse().map((product) => {
           const { price, name, media, id, quantity, line_total, permalink } = product;
           return (
             <div key={id} className='md:grid grid-cols-4 border-b'>
