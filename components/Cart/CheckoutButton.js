@@ -16,7 +16,7 @@ const CheckoutButton = ({ cart }) => {
         <div className='sm:flex items-center justify-between mt-5 sm:space-x-3'>
           <button
             onClick={() => router.back()}
-            className='border block text-center mb-5 sm:mb-0 border-black capitalize py-3 px-1 bg-white w-full sm:w-[300px]'>
+            className='border block text-center mb-5 sm:mb-0 hover:bg-black hover:text-gray-100 transition duration-300 border-black capitalize py-3 px-1 bg-white w-full sm:w-[300px]'>
             continue shopping
           </button>
           <Link href='/checkout'>

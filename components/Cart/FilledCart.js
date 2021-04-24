@@ -15,7 +15,7 @@ const FilledCart = ({ cart }) => {
     <div>
       <h1 className='font-semibold md:text-2xl text-lg capitalize px-5'>My basket</h1>
       <div className='md:flex items-center justify-between my-5 px-5'>
-        <Link href='/products/all'>
+        <Link href='/'>
           <a>
             <p className='border uppercase mb-5 md:mb-0  py-2 px-5'>shop more</p>
           </a>
