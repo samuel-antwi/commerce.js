@@ -3,8 +3,6 @@ import Link from 'next/link';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 export default function Home({ data }) {
-  console.log(data);
-
   const images = [
     {
       original: '/images/home-bg.webp',
