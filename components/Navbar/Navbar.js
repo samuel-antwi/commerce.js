@@ -11,7 +11,7 @@ const Navbar = () => {
       <div className='md:px-14 px-8 py-5 shadow  flex items-center justify-between'>
         <Link href='/'>
           <a>
-            <h1 className='uppercase text-2xl font-bold tracking-wide text-gray-300'>Melshop</h1>
+            <h1 className='uppercase text-2xl font-bold tracking-wide text-gray-300'>Megashop</h1>
           </a>
         </Link>
         <div className='flex items-center space-x-4'>

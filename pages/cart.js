@@ -10,7 +10,7 @@ const Cart = () => {
   if (Object.keys(cart).length === 0) return null;
 
   return (
-    <main>
+    <main className='pt-10'>
       <div className='max-w-7xl mx-auto'>
         {!cart.line_items?.length ? <EmptyCart /> : <FilledCart cart={cart} />}
         {cart.line_items.length > 0 && <CheckoutButton cart={cart} />}

@@ -25,7 +25,7 @@ const Footer = () => {
         <div className='md:grid lg:grid-cols-3 md:grid-cols-2 gap-10 lg:border-b border-gray-600 md:space-y-0 space-y-8'>
           <div className='col-span-1 mb-10'>
             <div className=' mb-5'>
-              <h1 className='text-gray-100 font-bold uppercase text-lg tracking-wider'>Melshop</h1>
+              <h1 className='text-gray-100 font-bold uppercase text-lg tracking-wider'>Megashop</h1>
               <Underline primary={true} />
             </div>
             <p className='mb-3'>
@@ -55,7 +55,7 @@ const Footer = () => {
             <p> 21 Debby Avenue, Nottingham, NG21 5XU</p>
             <span className='flex items-center'>
               <FaEnvelope className='mr-2' />
-              <a href='mailto:support@progym.com'>Support@.com</a>
+              <a href='mailto:support@progym.com'>Support@megashop.com</a>
             </span>
             <span className='flex items-center'>
               <FaPhoneAlt className='mr-3' />
