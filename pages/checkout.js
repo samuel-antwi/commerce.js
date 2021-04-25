@@ -15,8 +15,6 @@ const Checkout = () => {
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingCountries, setShippingCountries] = useState([]);
 
-  console.log(cart);
-
   const fetchShippingCountries = async (checkoutTokenId) => {
     const { countries } = await commerce.services.localeListShippingCountries(checkoutTokenId);
     setShippingCountries(countries);
