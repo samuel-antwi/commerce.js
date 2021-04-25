@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 const Layout = ({ title, children }) => {
   const router = useRouter();
   return (
-    <div className='font-roboto'>
+    <div className='font-poppins'>
       <Navbar />
       <AnnoucementBar />
       <Head>{title}</Head>

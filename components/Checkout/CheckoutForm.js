@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import FormInput from './FormInput';
 
 const CheckoutForm = ({ checkoutToken }) => {
-  console.log(checkoutToken);
   const {
     register,
     handleSubmit,
@@ -12,6 +11,7 @@ const CheckoutForm = ({ checkoutToken }) => {
 
   return (
     <main>
+      <h1 className='mb-10 font-medium text-lg'>Customer and shipping details</h1>
       <form>
         <div className='sm:grid grid-cols-3 gap-3 sm:mb-5'>
           <FormInput name='firstName' label='First name *' />
@@ -22,7 +22,7 @@ const CheckoutForm = ({ checkoutToken }) => {
           <div className='flex flex-col mb-5 sm:mb-0'>
             <label className='text-gray-500 text-sm'>Country</label>
             <select
-              className='border border-[#D6D6D6] py-[10px]  px-2 focus:outline-none focus:ring-1 focus:ring-[#D6D6D6]'
+              className='border border-[#D6D6D6] py-[8px]  px-2 focus:outline-none focus:ring-1 focus:ring-[#D6D6D6]'
               name=''
               id=''>
               <option value='UK'>United Kingdom</option>
