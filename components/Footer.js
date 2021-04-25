@@ -26,7 +26,7 @@ const Footer = () => {
           <div className='col-span-1 mb-10'>
             <div className=' mb-5'>
               <h1 className='text-gray-100 font-bold uppercase text-lg tracking-wider'>Megashop</h1>
-              <Underline primary={true} />
+              <Underline />
             </div>
             <p className='mb-3'>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam dignissimos repellat

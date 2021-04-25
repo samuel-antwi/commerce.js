@@ -8,10 +8,12 @@ const Navbar = () => {
 
   return (
     <nav className='sticky top-0 bg-black text-gray-100 mt-4  z-10'>
-      <div className='md:px-14 px-8 py-5 shadow  flex items-center justify-between'>
+      <div className='md:px-14 px-5 py-5 shadow  flex items-center justify-between'>
         <Link href='/'>
           <a>
-            <h1 className='uppercase text-2xl font-bold tracking-wide text-gray-300'>Megashop</h1>
+            <h1 className='uppercase md:text-2xl font-bold tracking-wide text-gray-300'>
+              Megashop
+            </h1>
           </a>
         </Link>
         <div className='flex items-center space-x-4'>
