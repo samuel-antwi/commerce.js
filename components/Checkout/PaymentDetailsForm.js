@@ -18,7 +18,6 @@ const PaymentDetailsForm = () => {
               <div className='col-span-3 flex flex-col mb-3 sm:mb-0'>
                 <label className='text-sm text-gray-400'>Card Number</label>
                 <input
-                  value={cardNumber}
                   className='p-2 border border-[#D6D6D6] focus:outline-none focus:ring-1 focus:ring-[#D6D6D6] '
                   name='cardNumber'
                   type='text'
@@ -27,7 +26,6 @@ const PaymentDetailsForm = () => {
               <div className='col-span-1 flex flex-col'>
                 <label className='text-sm text-gray-400'>CVC (CVV)</label>
                 <input
-                  value={pinNumber}
                   className='p-2 border border-[#D6D6D6] focus:outline-none focus:ring-1 focus:ring-[#D6D6D6] '
                   name='cvc'
                   type='text'

@@ -9,8 +9,6 @@ import { BsChevronRight } from 'react-icons/bs';
 const FilledCart = ({ cart }) => {
   const { handleUpdateQty, handleRemoveFromCart } = useProductsProvider();
 
-  if (!cart.line_items.length) return <p>Loading...</p>;
-
   return (
     <div>
       <h1 className='font-semibold md:text-2xl text-lg capitalize px-5'>My basket</h1>
@@ -21,7 +19,7 @@ const FilledCart = ({ cart }) => {
           </a>
         </Link>
         <div className='md:w-1/2 w-full'>
-          <div className='flex justify-between items-center md:text-xl md:font-bold text-gray-700 bg-[#F4FAFB] p-2'>
+          <div className='flex justify-between items-center md:text-lg text-gray-700 bg-[#F4FAFB] p-2'>
             <h1>Sub total</h1>
             {Object.keys(cart).length !== 0 && <p>{cart.subtotal.formatted_with_symbol}</p>}
           </div>

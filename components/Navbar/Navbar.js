@@ -28,9 +28,11 @@ const Navbar = () => {
           <Link href='/cart'>
             <a className='flex'>
               <FiShoppingCart size={30} />
-              <p className='text-xs -mt-2 w-4 h-4 -ml-1 rounded-full flex items-center justify-center bg-[#0CA68E] text-gray-100'>
-                {cart.total_items}
-              </p>
+              {cart && (
+                <p className='text-xs -mt-2 w-4 h-4 -ml-1 rounded-full flex items-center justify-center bg-[#0CA68E] text-gray-100'>
+                  {cart.total_items}
+                </p>
+              )}
             </a>
           </Link>
         </div>
