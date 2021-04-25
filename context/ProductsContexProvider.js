@@ -2,18 +2,24 @@ import { ProductsContext } from './ProductsContext';
 import { useContext, useState, useEffect } from 'react';
 import { commerce } from '../lib/commerce';
 import { useRouter } from 'next/router';
+import { useQuery } from 'react-query';
 
 export const ProductContextProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
+  const { data, status, isLoading } = useQuery('cart', async () => {
+    const cartItem = await commerce.cart.retrieve();
+    return cartItem;
+  });
 
   const router = useRouter();
 
-  const fetchCart = async () => {
-    const cart = await commerce.cart.retrieve();
-    setCart(cart);
-  };
+  // Fetch cart
+  // const fetchCart = async () => {
+  //   const cartItem = await commerce.cart.retrieve();
+  //   setCart(cartItem);
+  // };
 
+  // handle add to cart function
   const handleAddToCart = async (productId, quantity) => {
     const { cart } = await commerce.cart.add(productId, quantity);
     setCart(cart);
@@ -33,12 +39,16 @@ export const ProductContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchCart();
-  }, []);
+    if (status === 'success') {
+      setCart(data);
+    }
+  }, [status, data]);
+
+  if (isLoading) return null;
 
   return (
     <ProductsContext.Provider
-      value={{ products, cart, handleAddToCart, handleUpdateQty, handleRemoveFromCart }}>
+      value={{ cart, status, handleAddToCart, handleUpdateQty, handleRemoveFromCart }}>
       {children}
     </ProductsContext.Provider>
   );

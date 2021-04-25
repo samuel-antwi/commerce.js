@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 const Order = ({ checkoutToken }) => {
-  console.log(checkoutToken);
   const {
     live: { line_items, total, discount, tax, total_due },
   } = checkoutToken;
