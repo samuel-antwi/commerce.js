@@ -10,28 +10,16 @@ import { IoMdArrowDropright } from 'react-icons/io';
 import PaymentDetailsForm from '../components/Checkout/PaymentDetailsForm';
 
 const Checkout = () => {
-  const { cart } = useProductsProvider();
   const [checkoutToken, setCheckoutToken] = useState(null);
-  const [shippingCountries, setShippingCountries] = useState([]);
-  const [shippingCountry, setShippingCountry] = useState('');
-
-  const fetchShippingCountries = async (checkoutTokenId) => {
-    const { countries } = await commerce.services.localeListShippingCountries(checkoutTokenId);
-    setShippingCountries(countries);
-    setShippingCountry(Object.keys(countries)[0]);
-  };
+  const { cart } = useProductsProvider();
 
   useEffect(() => {
     if (cart.id) {
       const generateToken = async () => {
         try {
-          const token = await commerce.checkout.generateToken(cart.id, {
-            type: 'cart',
-          });
+          const token = await commerce.checkout.generateTokenFrom('cart', commerce.cart.id());
           setCheckoutToken(token);
-        } catch (error) {
-          console.log(error);
-        }
+        } catch {}
       };
       generateToken();
     }
