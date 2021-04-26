@@ -8,12 +8,12 @@ import { commerce } from '../lib/commerce';
 import Link from 'next/link';
 import { IoMdArrowDropright } from 'react-icons/io';
 import PaymentDetailsForm from '../components/Checkout/PaymentDetailsForm';
-import { useQuery } from 'react-query';
 
 const Checkout = () => {
   const { cart } = useProductsProvider();
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingCountries, setShippingCountries] = useState([]);
+  const [shippingCountry, setShippingCountry] = useState('');
 
   const fetchShippingCountries = async (checkoutTokenId) => {
     const { countries } = await commerce.services.localeListShippingCountries(checkoutTokenId);
@@ -22,22 +22,20 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    const generateToken = async () => {
-      try {
-        const token = await commerce.checkout.generateToken(cart.id, {
-          type: 'cart',
-        });
-        setCheckoutToken(token);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    generateToken();
+    if (cart.id) {
+      const generateToken = async () => {
+        try {
+          const token = await commerce.checkout.generateToken(cart.id, {
+            type: 'cart',
+          });
+          setCheckoutToken(token);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      generateToken();
+    }
   }, [cart]);
-
-  useEffect(() => {
-    fetchShippingCountries();
-  }, []);
 
   return (
     <main className='min-h-screen max-w-[85rem] mx-auto pt-10 px-5 xl:px-0'>

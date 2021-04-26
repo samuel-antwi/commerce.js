@@ -9,8 +9,8 @@ const Cart = () => {
   return (
     <main className='pt-10'>
       <div className='max-w-7xl mx-auto'>
-        {!cart.line_items?.length ? <EmptyCart /> : <FilledCart cart={cart} />}
-        {cart.line_items?.length > 0 && <CheckoutButton cart={cart} />}
+        {!cart?.line_items?.length ? <EmptyCart /> : <FilledCart cart={cart} />}
+        {cart?.line_items?.length > 0 && <CheckoutButton cart={cart} />}
       </div>
     </main>
   );
