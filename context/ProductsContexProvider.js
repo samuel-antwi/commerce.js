@@ -35,7 +35,7 @@ export const ProductContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchCart();
-  }, [cart]);
+  }, []);
 
   return (
     <ProductsContext.Provider
