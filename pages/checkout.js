@@ -1,29 +1,29 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
-import CheckoutForm from '../components/Checkout/CheckoutForm';
-import Order from '../components/Checkout/Order';
-import LoadingScreen from '../components/LoadingScreen';
-import { useProductsProvider } from '../context/ProductsContexProvider';
-import { commerce } from '../lib/commerce';
-import Link from 'next/link';
-import { IoMdArrowDropright } from 'react-icons/io';
-import PaymentDetailsForm from '../components/Checkout/PaymentDetailsForm';
+import { useState } from 'react'
+import { useEffect } from 'react'
+import CheckoutForm from '../components/Checkout/CheckoutForm'
+import Order from '../components/Checkout/Order'
+import LoadingScreen from '../components/LoadingScreen'
+import { useProductsProvider } from '../context/ProductsContexProvider'
+import { commerce } from '../lib/commerce'
+import Link from 'next/link'
+import { IoMdArrowDropright } from 'react-icons/io'
+import PaymentDetailsForm from '../components/Checkout/PaymentDetailsForm'
 
 const Checkout = () => {
-  const [checkoutToken, setCheckoutToken] = useState(null);
-  const { cart } = useProductsProvider();
+  const [checkoutToken, setCheckoutToken] = useState(null)
+  const { cart } = useProductsProvider()
 
   useEffect(() => {
     if (cart.id) {
       const generateToken = async () => {
         try {
-          const token = await commerce.checkout.generateTokenFrom('cart', commerce.cart.id());
-          setCheckoutToken(token);
+          const token = await commerce.checkout.generateTokenFrom('cart', commerce.cart.id())
+          setCheckoutToken(token)
         } catch {}
-      };
-      generateToken();
+      }
+      generateToken()
     }
-  }, [cart]);
+  }, [cart])
 
   return (
     <main className='min-h-screen max-w-[85rem] mx-auto pt-10 px-5 xl:px-0'>
@@ -48,7 +48,7 @@ const Checkout = () => {
         <LoadingScreen />
       )}
     </main>
-  );
-};
+  )
+}
 
-export default Checkout;
+export default Checkout

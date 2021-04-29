@@ -2,8 +2,6 @@ import { FaDotCircle } from 'react-icons/fa';
 import { useState } from 'react/cjs/react.development';
 
 const PaymentDetailsForm = () => {
-  const [cardNumber, setCardNumber] = useState('4242 4242 4242 4242');
-  const [pinNumber, setPinNumber] = useState('123');
   return (
     <main className='pt-10'>
       <h1 className='mb-5'>Payment details</h1>
