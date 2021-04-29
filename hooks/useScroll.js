@@ -1,15 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 const useScroll = () => {
-  const [showButton, setShowButton] = useState(false);
+  const [showButton, setShowButton] = useState(false)
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      window.scrollY > 1000 ? setShowButton(true) : setShowButton(false);
-    });
-  }, [showButton]);
+    const bottom = window.addEventListener('scroll', () => {
+      window.scrollY > 500 ? setShowButton(true) : setShowButton(false)
+      return bottom
+    })
 
-  return showButton;
-};
+    return () => {
+      window.removeEventListener('scroll', bottom)
+    }
+  }, [showButton])
 
-export default useScroll;
+  return showButton
+}
+
+export default useScroll
