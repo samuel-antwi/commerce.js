@@ -5,7 +5,7 @@ const useScroll = () => {
 
   useEffect(() => {
     const bottom = window.addEventListener('scroll', () => {
-      window.scrollY > 500 ? setShowButton(true) : setShowButton(false)
+      window.scrollY > 300 ? setShowButton(true) : setShowButton(false)
       return bottom
     })
 
