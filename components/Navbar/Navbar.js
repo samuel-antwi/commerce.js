@@ -1,24 +1,24 @@
-import { FiShoppingCart } from 'react-icons/fi';
-import Link from 'next/link';
-import { useProductsProvider } from '../../context/ProductsContexProvider';
-import { FaUserCircle } from 'react-icons/fa';
+import { FiShoppingCart } from 'react-icons/fi'
+import Link from 'next/link'
+import { useProductsProvider } from '../../context/ProductsContexProvider'
+import { FaUserCircle } from 'react-icons/fa'
 
 const Navbar = () => {
-  const { cart } = useProductsProvider();
+  const { cart } = useProductsProvider()
 
   return (
-    <nav className='sticky top-0 bg-black text-gray-100 mt-4  z-10'>
-      <div className='md:px-14 px-5 py-5 shadow  flex items-center justify-between'>
+    <nav className='sticky top-0 z-10 text-gray-100 bg-black md:mt-4'>
+      <div className='flex items-center justify-between px-5 py-5 shadow md:px-14'>
         <Link href='/'>
           <a>
-            <h1 className='uppercase md:text-2xl font-bold tracking-wide text-gray-300'>
+            <h1 className='font-bold tracking-wide text-gray-300 uppercase md:text-2xl'>
               Megashop
             </h1>
           </a>
         </Link>
         <div className='flex items-center space-x-4'>
           <Link href='/account'>
-            <a>
+            <a className='hidden md:block'>
               <span className='flex items-center'>
                 <FaUserCircle />
                 <p className='ml-2 text-sm'>My Account</p>
@@ -38,7 +38,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

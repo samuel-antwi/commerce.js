@@ -1,33 +1,37 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
 const Order = ({ checkoutToken }) => {
   const {
     live: { line_items, total, discount, tax, total_due },
-  } = checkoutToken;
+  } = checkoutToken
 
   return (
-    <main className='bg-[#F7FBFD] py-10 px-5'>
+    <main className='px-5 py-10 '>
       <div>
-        <h1 className='mb-3'>Your order</h1>
+        <h1 className='mb-3 text-lg font-medium'>Your order</h1>
         <hr />
         <div className='pt-3'>
           {line_items.map((item) => (
-            <div key={item.id}>
-              <div className='flex justify-between mb-3 '>
-                <div className='flex'>
-                  <Image
-                    className='object-cover'
-                    src={item.media.source}
-                    width={70}
-                    height={70}
-                    alt={item.name}
-                  />
-                  <span className='ml-3 text-sm text-gray-800'>
-                    <p className=' w-40'>{item.name}</p>
+            <div className='mb-5 border-b ' key={item.id}>
+              <div className='grid-cols-3 gap-10 mb-3 sm:grid '>
+                <div className='flex col-span-2 '>
+                  <div>
+                    <Image
+                      className='object-cover'
+                      src={item.media.source}
+                      width={70}
+                      height={70}
+                      alt={item.name}
+                    />
+                  </div>
+                  <span className='ml-3 text-sm text-gray-800 '>
+                    <p className='w-40 '>{item.name}</p>
                     <p className='text-gray-400'>Quantity: {item.quantity}</p>
                   </span>
                 </div>
-                <p className='text-black font-medium'>{item.line_total.formatted_with_symbol}</p>
+                <p className='flex justify-end col-span-1 font-medium text-black'>
+                  {item.line_total.formatted_with_symbol}
+                </p>
               </div>
             </div>
           ))}
@@ -47,17 +51,17 @@ const Order = ({ checkoutToken }) => {
             </div>
             <hr />
             <div className='flex justify-between pt-5 text-xl font-semibold text-black'>
-              <h1 className=' tracking-wider'>Total amount</h1>
+              <h1 className='tracking-wider '>Total amount</h1>
               <p>{total_due.formatted_with_symbol}</p>
             </div>
           </div>
         </div>
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default Order;
+export default Order
 
 const DiscountCodeForm = () => {
   return (
@@ -65,13 +69,13 @@ const DiscountCodeForm = () => {
       <div className='flex pt-5 space-x-4 '>
         <input
           type='text'
-          className='border flex-1 p-2 border-[#D6D6D6] focus:ring-1 focus:ring-[#D6D6D6] focus:outline-none'
+          className='border w-32 xs:flex-1 p-2 border-[#D6D6D6] focus:ring-1 focus:ring-[#D6D6D6] focus:outline-none'
           name=''
         />
-        <button className='bg-black text-gray-50 py-2 px-8 focus:outline-none focus:ring-1 focus:ring-[#D6D6D6] '>
+        <button className='bg-black text-gray-50 py-2 px-4  focus:outline-none focus:ring-1 focus:ring-[#D6D6D6] '>
           Apply
         </button>
       </div>
     </form>
-  );
-};
+  )
+}

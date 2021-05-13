@@ -8,10 +8,20 @@ module.exports = {
         futura: ['Futura', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
       },
+      screens: {
+        xxs: '280px',
+        xs: '360px',
+        smd: '480px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px',
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
-};
+  plugins: [require('@tailwindcss/forms')],
+}

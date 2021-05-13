@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import {
   FaFacebookF,
   FaInstagram,
@@ -5,27 +6,23 @@ import {
   FaTwitter,
   FaPhoneAlt,
   FaEnvelope,
-} from 'react-icons/fa';
-import { BsChevronUp } from 'react-icons/bs';
-import useScroll from '../hooks/useScroll';
+} from 'react-icons/fa'
 
 const Footer = () => {
-  const pageHasScrolled = useScroll();
-
   const getCurrentYear = () => {
-    return new Date().getFullYear();
-  };
+    return new Date().getFullYear()
+  }
 
   const socialIconsStyles =
-    'bg-primary rounded-full text-white p-3 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110';
+    'bg-primary rounded-full text-white p-3 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110'
 
   return (
     <div className='bg-[#272727] text-gray-400 mt-20'>
       <div className=' max-w-[90rem] mx-auto py-10 sm:px-12  px-5'>
-        <div className='md:grid lg:grid-cols-3 md:grid-cols-2 gap-10 lg:border-b border-gray-600 md:space-y-0 space-y-8'>
+        <div className='gap-10 space-y-8 border-gray-600 md:grid lg:grid-cols-3 md:grid-cols-2 lg:border-b md:space-y-0'>
           <div className='col-span-1 mb-10'>
-            <div className=' mb-5'>
-              <h1 className='text-gray-100 font-bold uppercase text-lg tracking-wider'>Megashop</h1>
+            <div className='mb-5 '>
+              <h1 className='text-lg font-bold tracking-wider text-gray-100 uppercase'>Megashop</h1>
               <Underline />
             </div>
             <p className='mb-3'>
@@ -49,7 +46,7 @@ const Footer = () => {
           </div>
           <div className='col-span-1 space-y-4'>
             <div className='mb-5'>
-              <h1 className='text-primary font-bold uppercase text-lg tracking-wider'>address</h1>
+              <h1 className='text-lg font-bold tracking-wider uppercase text-primary'>address</h1>
               <Underline />
             </div>
             <p> 21 Debby Avenue, Nottingham, NG21 5XU</p>
@@ -64,7 +61,7 @@ const Footer = () => {
           </div>
           <div className='col-span-1'>
             <div className='mb-5'>
-              <h1 className='text-primary font-bold uppercase text-lg tracking-wider'>
+              <h1 className='text-lg font-bold tracking-wider uppercase text-primary'>
                 Join with us
               </h1>
               <Underline />
@@ -76,47 +73,33 @@ const Footer = () => {
             <SubscribeForm />
           </div>
         </div>
-        <div className='border-b border-gray-600 max-w-sm mx-auto'>
-          <p className=' text-gray-400 text-sm text-center pt-10 mb-5 tracking-wider'>
-            &#169; {getCurrentYear()} Melshop Ltd. All rights reserved.
+        <div className='max-w-sm mx-auto border-b border-gray-600'>
+          <p className='pt-10 mb-5 text-sm tracking-wider text-center text-gray-400 '>
+            &#169; {getCurrentYear()} Megashop Ltd. All rights reserved.
           </p>
         </div>
       </div>
-      {pageHasScrolled && (
-        <button
-          onClick={() => window.scrollTo(0, 0)}
-          className='fixed right-5 bottom-5 transition duration-400'>
-          <BsChevronUp className='bg-black h-10 w-10 rounded-full p-2.5 text-gray-100' />
-        </button>
-      )}
     </div>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
 
 const SubscribeForm = () => {
   return (
     <div>
-      <form className=' mt-5 flex rounded-full bg-white flex-grow items-center text-gray-800 '>
-        <div className='text-gray-700 rounded-l-full  py-4 px-3'>
-          <FaEnvelope />
-        </div>
+      <form className='flex items-center flex-grow mt-5 text-gray-800 rounded-full '>
+        <input className='w-full px-2 focus:outline-none' type='text' placeholder='Your email' />
         <input
-          className='focus:outline-none py-3 px-2 w-full'
-          type='text'
-          placeholder='Your email'
+          className='px-2 py-2.5 cursor-pointer text-gray-300 bg-gray-900 rounded-r-full focus:outline-none'
+          type='submit'
+          value='Subscribe'
         />
-        <button
-          className=' bg-gray-900  focus:outline-none  p-3 rounded-r-full text-gray-300'
-          type='submit'>
-          Subscribe
-        </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
 export const Underline = ({ primary }) => {
-  return <div className={`${primary ? 'bg-primary' : 'bg-white'} w-12 h-[4px]`}></div>;
-};
+  return <div className={`${primary ? 'bg-primary' : 'bg-white'} w-12 h-[4px]`}></div>
+}
