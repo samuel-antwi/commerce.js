@@ -1,13 +1,13 @@
-import { FiShoppingCart } from 'react-icons/fi'
-import Link from 'next/link'
-import { useProductsProvider } from '../../context/ProductsContexProvider'
-import { FaUserCircle } from 'react-icons/fa'
+import { FiShoppingCart } from 'react-icons/fi';
+import Link from 'next/link';
+import { useProductsProvider } from '../../context/ProductsContexProvider';
+import { FaUserCircle } from 'react-icons/fa';
 
 const Navbar = () => {
-  const { cart } = useProductsProvider()
+  const { cart } = useProductsProvider();
 
   return (
-    <nav className='sticky top-0 z-10 text-gray-100 bg-black md:mt-4'>
+    <nav className='fixed z-10 w-full text-gray-100 bg-black md:mt-8'>
       <div className='flex items-center justify-between px-5 py-5 shadow md:px-14'>
         <Link href='/'>
           <a>
@@ -38,7 +38,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

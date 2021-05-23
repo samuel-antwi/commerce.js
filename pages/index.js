@@ -1,19 +1,19 @@
-import { commerce } from '../lib/commerce'
-import Link from 'next/link'
-import ImageGallery from 'react-image-gallery'
-import 'react-image-gallery/styles/css/image-gallery.css'
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
-import { useRouter } from 'next/router'
-import { BsChevronRight } from 'react-icons/bs'
-import { RiArrowRightSFill } from 'react-icons/ri'
-import images from '../lib/images'
+import { commerce } from '../lib/commerce';
+import Link from 'next/link';
+import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { useRouter } from 'next/router';
+import { BsChevronRight } from 'react-icons/bs';
+import { RiArrowRightSFill } from 'react-icons/ri';
+import images from '../lib/images';
 
 export default function Home({ data }) {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <main>
-      <div className='pt-10 md:px-10'>
+      <div className=' md:px-10'>
         <div className='relative'>
           <ImageGallery
             items={images}
@@ -81,17 +81,17 @@ export default function Home({ data }) {
       </div>
       <ShowCase />
     </main>
-  )
+  );
 }
 
 export const getStaticProps = async () => {
-  const { data } = await commerce.categories.list()
+  const { data } = await commerce.categories.list();
   return {
     props: {
       data,
     },
-  }
-}
+  };
+};
 
 const ShowCase = () => {
   return (
@@ -119,5 +119,5 @@ const ShowCase = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
